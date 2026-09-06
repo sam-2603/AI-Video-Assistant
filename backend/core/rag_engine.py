@@ -12,11 +12,7 @@ def get_llm():
 def format_docs(docs):
     return "\n\n".join([doc.page_content for doc in docs])
 
-# NOTE (API integration): `collection_name` is an ADDITIVE optional parameter,
-# defaulting to None (original behavior, single shared collection). The FastAPI
-# layer passes a unique collection name per session_id so each processed
-# video/meeting gets its own isolated retrieval context instead of sharing one
-# persisted Chroma collection across every session.
+
 def build_rag_chain(transcript:str, collection_name: str = None):
 
     vector_store = build_vector_store(transcript, collection_name=collection_name)

@@ -9,11 +9,7 @@ from core.rag_engine import build_rag_chain, ask_question
 
 
 
-# NOTE (API integration): `session_id` is an ADDITIVE optional parameter
-# (default None). It is forwarded to build_rag_chain() as the vector-store
-# collection name so each processed video gets an isolated RAG context when
-# called from the FastAPI layer. The CLI entry point below never passes it,
-# so `python main.py` behaves exactly as before.
+
 def run_pipeline(source :str, language :str = "english", session_id: str = None) -> dict:
     print("starting AI Video Assistant")
 
@@ -50,15 +46,15 @@ if __name__ == "__main__":
     result = run_pipeline(source, language)
 
     print("\n" + "=" * 60)
-    print(f"📌 Title: {result['title']}")
-    print(f"\n📋 Summary:\n{result['summary']}")
-    print(f"\n✅ Action Items:\n{result['action_items']}")
-    print(f"\n🔑 Key Decisions:\n{result['key_decisions']}")
-    print(f"\n❓ Open Questions:\n{result['open_questions']}")
+    print(f" Title: {result['title']}")
+    print(f"\n Summary:\n{result['summary']}")
+    print(f"\n Action Items:\n{result['action_items']}")
+    print(f"\n Key Decisions:\n{result['key_decisions']}")
+    print(f"\n Open Questions:\n{result['open_questions']}")
     print("=" * 60)
 
     # Phase 2 — Chat with your meeting via RAG
-    print("\n💬 Chat with your meeting (type 'exit' to quit)\n")
+    print("\n Chat with your meeting (type 'exit' to quit)\n")
     rag_chain = result["rag_chain"]
     while True:
         question = input("You: ").strip()
@@ -68,4 +64,4 @@ if __name__ == "__main__":
         if not question:
             continue
         answer = ask_question(rag_chain, question)
-        print(f"\n🤖 Assistant: {answer}\n")
+        print(f"\n Assistant: {answer}\n")

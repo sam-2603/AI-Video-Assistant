@@ -1,8 +1,4 @@
-"""
-API layer only. This module does NOT reimplement any AI/pipeline logic.
-It calls the existing `run_pipeline()` from main.py and the existing
-`ask_question()` from core.rag_engine, and exposes them over HTTP.
-"""
+
 
 import logging
 import os
