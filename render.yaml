@@ -1,29 +1,3 @@
-# services:
-#   - type: web
-#     name: ai-video-assistant-backend
-#     env: docker
-#     dockerfilePath: ./backend/Dockerfile
-#     dockerContext: ./backend
-#     envVars:
-#       - key: GROQ_API_KEY
-#         sync: false
-#       - key: SARVAM_API_KEY
-#         sync: false
-#       - key: SARVAM_STT_MODEL
-#         value: saaras:v3
-#       - key: WHISPER_MODEL
-#         value: small
-#       - key: ALLOWED_ORIGINS
-#         value: https://ai-video-assistant-frontend.onrender.com
-
-#   - type: web
-#     name: ai-video-assistant-frontend
-#     env: static
-#     buildCommand: cd frontend && npm install && npm run build
-#     staticPublishPath: frontend/dist
-#     envVars:
-#       - key: VITE_API_URL
-#         value: https://ai-video-assistant-backend.onrender.com
 services:
   # ─────────────────────────────────────────────────────────────
   # BACKEND
@@ -42,11 +16,11 @@ services:
       - key: SARVAM_API_KEY
         sync: false
 
+      - key: OPENAI_API_KEY
+        sync: false
+
       - key: SARVAM_STT_MODEL
         value: saaras:v3
-
-      - key: WHISPER_MODEL
-        value: base
 
       - key: ALLOWED_ORIGINS
         value: https://ai-video-assistant-frontend.onrender.com
@@ -64,4 +38,4 @@ services:
 
     envVars:
       - key: VITE_API_URL
-        value: https://ai-video-assistant-backend.onrender.com
+        value: https://ai-video-assistant-backend-8t3w.onrender.com
