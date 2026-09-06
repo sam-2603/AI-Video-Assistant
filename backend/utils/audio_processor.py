@@ -21,22 +21,25 @@ def download_youtube_audio(url: str) -> str:
     )
 
     ydl_opts = {
-        "format": "bestaudio/best",
-        "outtmpl": output_path,
+    "format": "bestaudio/best",
+    "outtmpl": output_path,
+    "noplaylist": True,
 
-        # Don't accidentally download a playlist
-        "noplaylist": True,
+    # Try YouTube's embedded player client.
+    "extractor_args": {
+        "youtube": {
+            "player_client": ["web_embedded"]
+        }
+    },
 
-        "postprocessors": [
-            {
-                "key": "FFmpegExtractAudio",
-                "preferredcodec": "wav",
-                "preferredquality": "192",
-            }
-        ],
+    "postprocessors": [{
+        "key": "FFmpegExtractAudio",
+        "preferredcodec": "wav",
+        "preferredquality": "192",
+    }],
 
-        "quiet": True,
-    }
+    "quiet": True,
+}
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
 
